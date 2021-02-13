@@ -1,14 +1,19 @@
 import mongoose from "mongoose";
 
+mongoose.Promise = global.Promise;
+
 mongoose.connect('mongodb://localhost:27017/user_test', { useUnifiedTopology: true, useNewUrlParser: true });
 
-mongoose.connection
-    .once('open', () => {
-        console.log('Good to go!');
-    })
-    .on('error', (error) => {
-        console.warn('Warning', error);
-    });
+before((done) => {
+    mongoose.connection
+        .once('open', () => {
+            done();
+        })
+        .on('error', (error) => {
+            console.warn('Warning', error);
+        });
+})
+
 
 // hook for cleaning up the database before and after testings
 beforeEach((done) => {
