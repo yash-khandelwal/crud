@@ -2,11 +2,13 @@ import mongoose from "mongoose";
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/user_test', { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/user_test', { useUnifiedTopology: true, useNewUrlParser: true });
 
-before((done) => {
+before(() => {
     mongoose.connection
-        .once('open', () => {
+        .once('open', (done) => {
+            console.log('good to go...');
+            console.info('connected to db...');
             done();
         })
         .on('error', (error) => {
