@@ -23,7 +23,7 @@ describe('Deleting a user', () => {
             .then((user) => {
                 assert(user === null);
                 done();
-            })
+            });
     });
 
     it('class method remove', (done) => {
@@ -60,7 +60,7 @@ describe('Deleting a user', () => {
             .then((user) => {
                 assert(user === null);
                 done();
-            })
+            });
     });
 
 });
