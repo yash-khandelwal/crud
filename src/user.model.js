@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import {postSchema} from './post.schema.js'
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -14,6 +15,10 @@ const userSchema = new mongoose.Schema({
     postCount: {
         type: Number,
         default: 0
+    },
+    posts: {
+        type: [postSchema],
+        default: []
     }
 });
 
