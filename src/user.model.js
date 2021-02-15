@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { BlogPost } from './blogpost.model.js';
 import { postSchema } from './post.schema.js';
 
 const userSchema = new mongoose.Schema({
@@ -27,8 +26,19 @@ const userSchema = new mongoose.Schema({
     }]
 });
 
-userSchema.virtual('postCount').get(function(){
+// virtual type attribute of the schema
+// value will be calculated by below geter function when attribute is read
+userSchema.virtual('postCount').get(function(){ // function(){} notation is important here because of 'this' keyword
     return this.posts.length;
-})
+});
+
+// middleware
+userSchema.pre('deleteOne', {document: true}, function(next){
+    const BlogPost = mongoose.model('blogpost');   // to get hold of BlogPost model
+    console.log('middleware called ............');
+    BlogPost
+        .remove({ _id: {$in: this.blogPosts}})
+        .then(() => next());
+});
 
 export const User = mongoose.model('user', userSchema);

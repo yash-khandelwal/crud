@@ -16,12 +16,12 @@ describe('Deleting a user', () => {
 
     it('model instance remove', (done) => {
         testUser
-            .remove()
+            .deleteOne()
             .then(() => {
                 return User.findById(testUser._id);
             })
             .then((user) => {
-                assert(user === null);
+                assert(!user);
                 done();
             });
     });
@@ -62,5 +62,4 @@ describe('Deleting a user', () => {
                 done();
             });
     });
-
 });
