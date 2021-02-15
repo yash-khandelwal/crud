@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import {postSchema} from './post.schema.js'
+import { BlogPost } from './blogpost.model.js';
+import {postSchema} from './post.schema.js';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -19,6 +20,10 @@ const userSchema = new mongoose.Schema({
     posts: {
         type: [postSchema],
         default: []
+    },
+    blogPosts: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: BlogPost
     }
 });
 
