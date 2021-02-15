@@ -37,12 +37,12 @@ describe('Updating Records', () => {
 
     it('A user can have their postCount incremented by 1', (done) => {
         User
-            .updateMany({name: 'kritagya'}, {$inc: {postCount: 1}})
+            .updateMany({name: 'kritagya'}, {$inc: {likes: 1}})
             .then(() => {
                 return User.findOne({name: 'kritagya'});
             })
             .then((user) => {
-                assert(user.postCount === 1);
+                assert(user.likes === 1);
                 done();
             })
     })

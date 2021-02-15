@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
         },
         required: [true, 'Name is required!'],
     },
-    postCount: {
+    likes: {
         type: Number,
         default: 0
     },
@@ -21,5 +21,9 @@ const userSchema = new mongoose.Schema({
         default: []
     }
 });
+
+userSchema.virtual('postCount').get(function(){
+    return this.posts.length;
+})
 
 export const User = mongoose.model('user', userSchema);
