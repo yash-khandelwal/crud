@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { BlogPost } from './blogpost.model.js';
-import {postSchema} from './post.schema.js';
+import { postSchema } from './post.schema.js';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema({
         type: [postSchema],
         default: []
     },
-    blogPosts: {
+    blogPosts: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: BlogPost
-    }
+        ref: 'blogpost'
+    }]
 });
 
 userSchema.virtual('postCount').get(function(){

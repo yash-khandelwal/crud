@@ -20,8 +20,12 @@ before(() => {
 // hook for cleaning up the database before and after testings
 beforeEach((done) => {
     // drops the collection from the database
-    mongoose.connection.collections.users.drop(() => {
-        // Ready to run the next test
-        done();
+    const { users, blogposts, comments } = mongoose.connection.collections;
+    users.drop(() => {
+        blogposts.drop(() => {
+            comments.drop(() => {
+                done();
+            })
+        })
     });
 });
